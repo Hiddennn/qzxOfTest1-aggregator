@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vi: set et smarttab sw=4 tabstop=4: -->
+<!--
+Copyright © 2017 Copyright(c) qzx and others. All rights reserved.
+
+This program and the accompanying materials are made available under the
+terms of the Eclipse Public License v1.0 which accompanies this distribution,
+and is available at http://www.eclipse.org/legal/epl-v10.html
+-->
+<features name="odl-qzxOfTest1-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+  <repository>mvn:org.opendaylight.yangtools/features-yangtools/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.controller/features-mdsal/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.mdsal.model/features-mdsal-model/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.dluxapps/features-dluxapps/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/${openflowplugin.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.l2switch/features-l2switch/${l2switch.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.ovsdb/library-features/${ovsdb.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.ovsdb/southbound-features/${ovsdb.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.netconf/features-netconf/1.2.4-Carbon/xml/features</repository>
+  <repository>mvn:org.opendaylight.netconf/features-netconf-connector/1.2.4-Carbon/xml/features</repository>
+  <repository>mvn:org.opendaylight.netconf/features-restconf/1.5.4-Carbon/xml/features</repository>
+  <feature name='odl-qzxOfTest1-api' version='${project.version}' description='OpenDaylight :: qzxOfTest1 :: api'>
+    <feature version='${mdsal.model.version}'>odl-mdsal-models</feature>
+    <feature version='${openflowplugin.version}'>odl-openflowplugin-southbound</feature>
+    <feature version="${openflowplugin.version}">odl-openflowplugin-flow-services</feature>
+    <bundle>mvn:edu.bupt.qzxOfTest1/qzxOfTest1-api/{{VERSION}}</bundle>
+  </feature>
+  <feature name='odl-qzxOfTest1' version='${project.version}' description='OpenDaylight :: qzxOfTest1'>
+    <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
+    <feature version='${project.version}'>odl-qzxOfTest1-api</feature>
+    <feature version='${openflowplugin.version}'>odl-openflowplugin-southbound</feature>
+    <bundle>mvn:edu.bupt.qzxOfTest1/qzxOfTest1-impl/{{VERSION}}</bundle>
+  </feature>
+  <feature name='odl-qzxOfTest1-rest' version='${project.version}' description='OpenDaylight :: qzxOfTest1 :: REST'>
+    <feature version="${project.version}">odl-qzxOfTest1</feature>
+    <feature version="${restconf.version}">odl-restconf</feature>
+  </feature>
+  <feature name='odl-qzxOfTest1-ui' version='${project.version}' description='OpenDaylight :: qzxOfTest1 :: UI'>
+    <feature version="${project.version}">odl-qzxOfTest1-rest</feature>
+    <feature version="${restconf.version}">odl-mdsal-apidocs</feature>
+    <feature version="${dluxapps.version}">odl-dluxapps-yangman</feature>
+  </feature>
+  <feature name='odl-qzxOfTest1-cli' version='${project.version}' description='OpenDaylight :: qzxOfTest1 :: CLI'>
+    <feature version="${project.version}">odl-qzxOfTest1</feature>
+    <bundle>mvn:edu.bupt.qzxOfTest1/qzxOfTest1-cli/{{VERSION}}</bundle>
+  </feature>
+
+</features>

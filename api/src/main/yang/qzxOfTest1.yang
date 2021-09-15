@@ -1,0 +1,135 @@
+module qzxOfTest1 {
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:qzxOfTest1";
+    prefix "qzxOfTest1";
+    import opendaylight-inventory {prefix inv;revision-date "2013-08-19";}
+    import ietf-inet-types { prefix inet; revision-date 2013-07-15; }
+    revision "2015-01-05" {
+        description "Initial revision of qzxOfTest1 model";
+    }
+    rpc qzx-send-flow {
+    	input {
+    	    leaf match-type {
+    	        type string;
+    	        description "Only support 'ip-match','mac-match','port-match' now.";
+    	    }
+    	    leaf instruction-type {
+    	        type string;
+    	        description "Only support 'drop-action','meter-action','queue-action' now.";
+    	    }
+    	    leaf queue-id {
+    	        type uint32;
+    	    }
+    		leaf switch {
+    			type string;
+   		    }
+    		leaf in-port {
+    			type string;
+    		}
+    		leaf out-port {
+    			type string;
+    		}
+    		leaf src-mac {
+    		    type string;
+    		}
+    		leaf dst-mac {
+    		    type string;
+    		}
+    		leaf src-ip {
+    		    type string;
+    		}
+    		leaf dst-ip {
+    		    type string;
+    		}
+    		leaf band-rate {
+    	         type uint32;
+    	    }
+    	    leaf band-burst-size {
+    	         type uint32;
+    	    }
+    	}
+    	
+    	output {
+    		leaf result {
+    			type string;
+    		}
+    	}
+    }
+    
+    rpc test-rpc {
+    	output {
+    		leaf my-leaf {
+    			type string;
+    		}
+    	}
+    }
+
+    grouping output-link{
+        leaf link-id{
+            type inet:uri;
+            description "link id";
+        }
+        leaf src-device{
+            type inet:uri;
+            description "source device";
+        }
+        leaf src-port{
+            type inet:uri;
+            description "source port";
+        }
+        leaf dst-device{
+            type inet:uri;
+             description "destination device";
+        }
+        leaf dst-port{
+            type inet:uri;
+            description "destination port";
+        }
+    }
+    grouping output-port{
+        leaf device-id{
+            type inet:uri;
+            description "link id";
+        }
+        leaf port-number{
+            type string;
+            description "port number";
+        }
+        leaf port-name{
+            type string;
+            description "port name";
+        }
+        leaf hardware-address{
+            type string;
+            description "hardware address";
+        }
+        leaf current-speed{
+            type int64;
+            description "current speed";
+        }
+        leaf maximum-speed{
+            type int64;
+            description "maximum speed";
+        }
+        leaf link-down{
+            type boolean;
+            description "link down";
+        }
+    }
+    rpc list-links-info{
+        output {
+            list links-info{
+                uses output-link;
+                description "link info";
+            }
+        }
+    }
+    rpc list-ports-info{
+        output{
+            list ports-info{
+                uses output-port;
+                description "port info";
+            }
+        }
+    }
+}
